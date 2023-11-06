@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wba.Oefening.RateAMovie.Web.Data;
 
@@ -11,9 +12,10 @@ using Wba.Oefening.RateAMovie.Web.Data;
 namespace Wba.Oefening.RateAMovie.Web.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20231106131705_Directorrelation")]
+    partial class Directorrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,24 +129,6 @@ namespace Wba.Oefening.RateAMovie.Web.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("Wba.Oefening.RateAMovie.Core.Entities.MovieActor", b =>
-                {
-                    b.Property<long>("MovieId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ActorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MovieId", "ActorId", "Role");
-
-                    b.HasIndex("ActorId");
-
-                    b.ToTable("MovieActor");
-                });
-
             modelBuilder.Entity("Wba.Oefening.RateAMovie.Core.Entities.Rating", b =>
                 {
                     b.Property<long>("Id")
@@ -226,25 +210,6 @@ namespace Wba.Oefening.RateAMovie.Web.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("Wba.Oefening.RateAMovie.Core.Entities.MovieActor", b =>
-                {
-                    b.HasOne("Wba.Oefening.RateAMovie.Core.Entities.Actor", "Actor")
-                        .WithMany("Movies")
-                        .HasForeignKey("ActorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Wba.Oefening.RateAMovie.Core.Entities.Movie", "Movie")
-                        .WithMany("Actors")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Actor");
-
-                    b.Navigation("Movie");
-                });
-
             modelBuilder.Entity("Wba.Oefening.RateAMovie.Core.Entities.Rating", b =>
                 {
                     b.HasOne("Wba.Oefening.RateAMovie.Core.Entities.Movie", "Movie")
@@ -264,11 +229,6 @@ namespace Wba.Oefening.RateAMovie.Web.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Wba.Oefening.RateAMovie.Core.Entities.Actor", b =>
-                {
-                    b.Navigation("Movies");
-                });
-
             modelBuilder.Entity("Wba.Oefening.RateAMovie.Core.Entities.Company", b =>
                 {
                     b.Navigation("Movies");
@@ -276,8 +236,6 @@ namespace Wba.Oefening.RateAMovie.Web.Migrations
 
             modelBuilder.Entity("Wba.Oefening.RateAMovie.Core.Entities.Movie", b =>
                 {
-                    b.Navigation("Actors");
-
                     b.Navigation("Ratings");
                 });
 

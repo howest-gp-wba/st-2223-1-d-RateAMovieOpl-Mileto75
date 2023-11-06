@@ -22,6 +22,8 @@ namespace Wba.Oefening.RateAMovie.Core.Entities
 
         //[MaxLength(100)]
         public string LastName { get; set; }
+        //many ratings
+        public ICollection<Rating> Ratings { get; set; }
 
     }
 }

@@ -30,14 +30,7 @@ namespace Wba.Oefening.RateAMovie.Web.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //Configure the User Entity
-            modelBuilder.Entity<User>()
-                .HasKey(u => u.Id);//primary key
-
-            modelBuilder.Entity<User>()//identity autoincrement
-                .Property(u => u.Id)
-                .UseIdentityColumn();
-
+            
             modelBuilder.Entity<User>()
                 .Property(u => u.Username)
                 .IsRequired()
@@ -123,7 +116,9 @@ namespace Wba.Oefening.RateAMovie.Web.Data
                 .Property(u => u.Id)
                 .UseIdentityColumn();
 
-           
+            //configure primary key for ActorMovie table
+            modelBuilder.Entity<MovieActor>()
+                .HasKey(m => new {m.MovieId,m.ActorId,m.Role });
         }
 
     }

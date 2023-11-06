@@ -12,5 +12,8 @@ namespace Wba.Oefening.RateAMovie.Core.Entities
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        //has made many movies
+        public ICollection<Movie> Movies { get; set; }
     }
 }
